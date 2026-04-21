@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verständliche Diagramme – Still erklärt</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal: #1D9E75;
+    --teal-dark: #0F6E56;
+    --teal-deep: #085041;
+    --teal-light: #e8f5f1;
+    --teal-mid: #b8e0d4;
+    --ink: #1a2420;
+    --ink-mid: #3d5048;
+    --ink-light: #6b8078;
+    --paper: #fafcfb;
+    --white: #ffffff;
+    --accent: #f0faf6;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--teal-deep);
+    padding: 3.5rem 2rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: 10%;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(29,158,117,0.2);
+  }
+
+  .header-inner {
+    max-width: 780px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .brand {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--teal-mid);
+    margin-bottom: 1rem;
+  }
+
+  header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 0.5rem;
+  }
+
+  header h1 em {
+    font-style: italic;
+    color: var(--teal-mid);
+  }
+
+  .header-sub {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.95rem;
+    margin-top: 1.2rem;
+  }
+
+  /* MAIN */
+  main {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 3rem 2rem 4rem;
+  }
+
+  /* SECTION */
+  section {
+    margin-bottom: 3.5rem;
+  }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 1.25rem;
+  }
+
+  .section-label::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 2px;
+    background: var(--teal);
+  }
+
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem;
+    color: var(--ink);
+    margin-bottom: 1.25rem;
+    line-height: 1.2;
+  }
+
+  p {
+    color: var(--ink-mid);
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+  }
+
+  /* LEITSATZ */
+  .leitsatz {
+    background: var(--teal-deep);
+    border-radius: 12px;
+    padding: 2rem 2.25rem;
+    margin-bottom: 3.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .leitsatz::before {
+    content: '„';
+    position: absolute;
+    top: -0.5rem;
+    left: 1.5rem;
+    font-family: 'DM Serif Display', serif;
+    font-size: 8rem;
+    color: rgba(255,255,255,0.06);
+    line-height: 1;
+  }
+
+  .leitsatz p {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--white);
+    line-height: 1.5;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* PRINZIPIEN GRID */
+  .prinzipien-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .prinzip-card {
+    background: var(--white);
+    border: 1px solid var(--teal-mid);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    position: relative;
+  }
+
+  .prinzip-num {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--teal);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.4rem;
+  }
+
+  .prinzip-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.05rem;
+    color: var(--teal-deep);
+    margin-bottom: 0.5rem;
+  }
+
+  .prinzip-card p {
+    font-size: 0.875rem;
+    color: var(--ink-light);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* CHECKLISTE */
+  .checklist {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+  }
+
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    background: var(--white);
+    border-left: 3px solid var(--teal);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.25rem;
+    font-size: 0.9rem;
+    color: var(--ink-mid);
+    line-height: 1.5;
+  }
+
+  .check-num {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    background: var(--teal);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    margin-top: 1px;
+  }
+
+  /* WERKZEUGE */
+  .werkzeug-block {
+    background: var(--accent);
+    border-radius: 10px;
+    padding: 1.5rem 1.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .werkzeug-block h3 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--teal-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.75rem;
+  }
+
+  .werkzeug-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    background: var(--white);
+    border: 1px solid var(--teal-mid);
+    border-radius: 20px;
+    padding: 0.3rem 0.85rem;
+    font-size: 0.8rem;
+    color: var(--teal-dark);
+    font-weight: 500;
+  }
+
+  /* ZIELGRUPPE TABLE */
+  .zielgruppe-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--teal-mid);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .zg-cell {
+    background: var(--white);
+    padding: 1.1rem 1.25rem;
+  }
+
+  .zg-cell.header {
+    background: var(--teal-deep);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .zg-cell h4 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--teal-deep);
+    margin-bottom: 0.3rem;
+  }
+
+  .zg-cell p {
+    font-size: 0.8rem;
+    color: var(--ink-light);
+    margin: 0;
+    line-height: 1.45;
+  }
+
+  /* RESSOURCEN */
+  .ressourcen-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+  }
+
+  .ressource-item {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    background: var(--white);
+    border: 1px solid #e0ede9;
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+  }
+
+  .ressource-icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    background: var(--teal-light);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+  }
+
+  .ressource-item h4 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+  }
+
+  .ressource-item p {
+    font-size: 0.8rem;
+    color: var(--ink-light);
+    margin: 0;
+  }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: linear-gradient(to right, var(--teal-mid), transparent);
+    margin: 2.5rem 0;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--teal-deep);
+    padding: 2rem;
+    text-align: center;
+  }
+
+  footer .brand {
+    color: var(--teal-mid);
+    margin-bottom: 0.5rem;
+  }
+
+  footer p {
+    color: rgba(255,255,255,0.5);
+    font-size: 0.8rem;
+    margin: 0;
+  }
+
+  footer a {
+    color: var(--teal-mid);
+    text-decoration: none;
+  }
+
+  @media (max-width: 600px) {
+    .zielgruppe-grid { grid-template-columns: 1fr; }
+    .prinzipien-grid { grid-template-columns: 1fr; }
+    header { padding: 2.5rem 1.5rem 2rem; }
+    main { padding: 2rem 1.5rem 3rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="brand">Still erklärt · Tamara Badikyan</div>
+    <h1>Verständliche Diagramme –<br><em>Aus Daten Botschaften machen</em></h1>
+    <p class="header-sub">FrauenComputerZentrumBerlin e.V. (FCZB) · Workshop-Ressourcen</p>
+  </div>
+</header>
+
+<main>
+
+  <div class="leitsatz">
+    <p>Wir lernen kein Tool. Wir lernen, wie man eine Botschaft aus Daten macht – egal ob Excel, Canva oder Stift und Papier.</p>
+  </div>
+
+  <!-- ZIELGRUPPE -->
+  <section>
+    <div class="section-label">Grundprinzip</div>
+    <h2>Das Diagramm folgt dem Publikum</h2>
+    <p>Die erste Frage vor jeder Visualisierung: Für wen machen wir das – und was soll die Person danach wissen oder tun?</p>
+
+    <div class="zielgruppe-grid">
+      <div class="zg-cell header">Situation</div>
+      <div class="zg-cell header">Ansatz</div>
+      <div class="zg-cell header">Merkmal</div>
+
+      <div class="zg-cell">
+        <h4>Führungskraft</h4>
+        <p>wenig Zeit, Entscheidung nötig</p>
+      </div>
+      <div class="zg-cell">
+        <p>Eine Zahl, eine Botschaft, eine Empfehlung</p>
+      </div>
+      <div class="zg-cell">
+        <p>Klar, kompakt, keine Ablenkung</p>
+      </div>
+
+      <div class="zg-cell">
+        <h4>Kolleg:innen</h4>
+        <p>Fachkenntnis vorhanden</p>
+      </div>
+      <div class="zg-cell">
+        <p>Mehr Detail, Austausch, Kontext</p>
+      </div>
+      <div class="zg-cell">
+        <p>Komplex ist in Ordnung</p>
+      </div>
+
+      <div class="zg-cell">
+        <h4>Per Mail</h4>
+        <p>ohne Begleitung, ohne dich</p>
+      </div>
+      <div class="zg-cell">
+        <p>Vollständig, selbsterklärend</p>
+      </div>
+      <div class="zg-cell">
+        <p>Niemand muss nachfragen</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CHECKLISTE -->
+  <section>
+    <div class="section-label">5 Fragen</div>
+    <h2>Checkliste für jedes Diagramm</h2>
+    <p>Nach jeder Visualisierung – fünf Fragen, bevor Du sie zeigst oder teilst.</p>
+
+    <ul class="checklist">
+      <li>
+        <span class="check-num">1</span>
+        <span><strong>Für wen?</strong> Wer schaut sich das Diagramm an – und was soll diese Person danach wissen oder tun?</span>
+      </li>
+      <li>
+        <span class="check-num">2</span>
+        <span><strong>Was ist die Botschaft?</strong> Steht sie im Titel – als Aussage, nicht als Thema?</span>
+      </li>
+      <li>
+        <span class="check-num">3</span>
+        <span><strong>Was kann weg?</strong> Gibt es Gitterlinien, Rahmen, Datenbeschriftungen oder Legenden, die keine neue Information liefern?</span>
+      </li>
+      <li>
+        <span class="check-num">4</span>
+        <span><strong>Wohin schaut das Auge zuerst?</strong> Lenkt Farbe oder Kontrast den Blick auf das Wichtigste – oder auf alles gleichzeitig?</span>
+      </li>
+      <li>
+        <span class="check-num">5</span>
+        <span><strong>Passt der Diagrammtyp?</strong> Vergleich zwischen Kategorien → Balken. Trend über Zeit → Linie.</span>
+      </li>
+    </ul>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- WIRRWARR VERMEIDEN -->
+  <section>
+    <div class="section-label">Werkzeugkasten</div>
+    <h2>Wirrwarr vermeiden</h2>
+    <p>Weniger Aufwand für das Gehirn – mehr Raum für die Botschaft. Schritt für Schritt:</p>
+
+    <div class="werkzeug-block">
+      <h3>Was raus kann</h3>
+      <div class="werkzeug-tags">
+        <span class="tag">Rahmen</span>
+        <span class="tag">Gitterlinien</span>
+        <span class="tag">Datenbeschriftungen (wenn Y-Achse reicht)</span>
+        <span class="tag">Legenden (durch direkte Beschriftung ersetzen)</span>
+        <span class="tag">Nachkommastellen</span>
+        <span class="tag">Diagonaler Achsentext</span>
+      </div>
+    </div>
+
+    <div class="werkzeug-block">
+      <h3>Was hilft</h3>
+      <div class="werkzeug-tags">
+        <span class="tag">Titel oben links, fett</span>
+        <span class="tag">Beschriftungen direkt in den Daten</span>
+        <span class="tag">Balken enger zusammen</span>
+        <span class="tag">Y-Achse kürzen</span>
+        <span class="tag">Linie statt Balken bei Zeitverlauf</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- AUFMERKSAMKEIT LENKEN -->
+  <section>
+    <div class="section-label">Werkzeugkasten</div>
+    <h2>Aufmerksamkeit lenken</h2>
+    <p>Zu viel hervorheben bedeutet nichts hervorheben. Farbe, sparsam eingesetzt, ist eines der wirksamsten Werkzeuge.</p>
+
+    <div class="prinzipien-grid">
+      <div class="prinzip-card">
+        <div class="prinzip-num">Werkzeug 01</div>
+        <h3>Farbe</h3>
+        <p>Nur das Wichtigste in Farbe – alles andere grau. Blau wirkt positiv, Rot signalisiert Dringlichkeit.</p>
+      </div>
+      <div class="prinzip-card">
+        <div class="prinzip-num">Werkzeug 02</div>
+        <h3>Kontrast</h3>
+        <p>Schwarz inmitten von Grau. Das Auge findet das Dunkle sofort – ohne Farbe zu brauchen.</p>
+      </div>
+      <div class="prinzip-card">
+        <div class="prinzip-num">Werkzeug 03</div>
+        <h3>Linienstärke</h3>
+        <p>Eine Linie fetter machen lenkt den Blick – subtil, aber wirksam.</p>
+      </div>
+      <div class="prinzip-card">
+        <div class="prinzip-num">Werkzeug 04</div>
+        <h3>Titel = Botschaft</h3>
+        <p>Nicht „Einstellungen nach Monat" – sondern „Die meisten Einstellungen erfolgen im ersten Monat jedes Quartals."</p>
+      </div>
+      <div class="prinzip-card">
+        <div class="prinzip-num">Werkzeug 05</div>
+        <h3>Schrittweiser Aufbau</h3>
+        <p>Erst weniger zeigen – dann Schritt für Schritt aufbauen. Das Publikum wird geführt, nicht überwältigt.</p>
+      </div>
+      <div class="prinzip-card">
+        <div class="prinzip-num">Werkzeug 06</div>
+        <h3>Gestrichelte Linie</h3>
+        <p>Für Ziele, Schätzungen oder Unsicherheit. Eine Konvention, die die meisten sofort lesen.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- GESCHICHTE ERZÄHLEN -->
+  <section>
+    <div class="section-label">Struktur</div>
+    <h2>Eine Geschichte aus Daten erzählen</h2>
+    <p>Eine Datenpräsentation braucht eine Dramaturgie – genauso wie eine Geschichte einen Anfang, eine Mitte und ein Ende hat.</p>
+
+    <div class="prinzipien-grid">
+      <div class="prinzip-card">
+        <div class="prinzip-num">Anfang</div>
+        <h3>Kontext setzen</h3>
+        <p>Wer schaut zu? Was ist der Hintergrund? Warum schauen wir uns diese Daten an?</p>
+      </div>
+      <div class="prinzip-card">
+        <div class="prinzip-num">Mitte</div>
+        <h3>Spannung aufbauen</h3>
+        <p>Daten Schritt für Schritt zeigen. Jeder Schritt beantwortet eine Frage – und stellt die nächste.</p>
+      </div>
+      <div class="prinzip-card">
+        <div class="prinzip-num">Ende</div>
+        <h3>Botschaft landen</h3>
+        <p>Was soll das Publikum danach wissen oder tun? Das ist der Moment, wo Daten zur Entscheidung werden.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- RESSOURCEN -->
+  <section>
+    <div class="section-label">Zum Weiterlesen</div>
+    <h2>Ressourcen</h2>
+
+    <div class="ressourcen-list">
+      <div class="ressource-item">
+        <div class="ressource-icon">📘</div>
+        <div>
+          <h4>Storytelling mit Daten – Cole Nussbaumer Knaflic</h4>
+          <p>Das Standardwerk zur Datenvisualisierung. Grundlage dieses Workshops. (Vahlen, 2015)</p>
+        </div>
+      </div>
+      <div class="ressource-item">
+        <div class="ressource-icon">📗</div>
+        <div>
+          <h4>Storytelling with Data: Let's Practice! – Cole Nussbaumer Knaflic</h4>
+          <p>Übungssammlung für alle, die tiefer einsteigen möchten. (Wiley, 2019)</p>
+        </div>
+      </div>
+      <div class="ressource-item">
+        <div class="ressource-icon">📙</div>
+        <div>
+          <h4>Better Data Visualizations – Jonathan Schwabish</h4>
+          <p>Präattentive Attribute und wie unser Gehirn visuelle Informationen verarbeitet. (Columbia University Press, 2021)</p>
+        </div>
+      </div>
+      <div class="ressource-item">
+        <div class="ressource-icon">🌐</div>
+        <div>
+          <h4>storytellingwithdata.com</h4>
+          <p>Blog, Übungen und Community von Cole Nussbaumer Knaflic – kostenlos zugänglich.</p>
+        </div>
+      </div>
+      <div class="ressource-item">
+        <div class="ressource-icon">▶️</div>
+        <div>
+          <h4>Still erklärt – YouTube</h4>
+          <p>Zugängliche Excel-Tutorials in einfacher Sprache – mit Untertiteln und Audio.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="brand">Still erklärt</div>
+  <p>Tamara Badikyan · <a href="mailto:tamara.badikyan@gmail.com">tamara.badikyan@gmail.com</a></p>
+</footer>
+
+</body>
+</html>
